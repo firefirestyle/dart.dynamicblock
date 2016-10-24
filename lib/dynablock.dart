@@ -44,7 +44,8 @@ class DynaBlockCore {
   }
 
   updateIndex(int xs, int ys, int xe, int ye) {
-    print("##> addInfo ${xs}, ${ys}, ${xe}, ${ye}");
+    (useDebugLog == true ? print("""    ## CALL UPDATEINDEX ${xs}, ${ys}, ${xe}, ${ye}""") : null);
+
     //
     // [width]
     bool added = false;
@@ -52,12 +53,12 @@ class DynaBlockCore {
       for (int i = 0; i < infos.length; i++) {
         var info = infos[i];
         if (!(info.y <= ye)) {
-          print("##> none ${info.toString()}");
           continue;
         }
         if (info.xs <= xs && xs < info.xe) {
           // add
-          print("##> in ${info.toString()}");
+          (useDebugLog == true ? print("""      ## UPDATEINDEX IN ${info.toString()}")}""") : null);
+
           if (added == false) {
             var v = new FreeSpaceInfo.fromPos(xe, ys, info.xe - xe, xs, xe);
             if (false == infos.contains(v)) {
@@ -72,28 +73,29 @@ class DynaBlockCore {
             base1.xe = xs;
             base2.xs = xe;
             if (base1.xs != base1.xe) {
-              print("##> in a: ${base1.toString()}");
+              (useDebugLog == true ? print("""      ## UPDATEINDEX IN a ${base1.toString()}")}""") : null);
               if (false == infos.contains(base1)) {
+                (useDebugLog == true ? print("""        ## UPDATEINDEX IN a add")}""") : null);
                 infos.add(base1);
               }
             }
             if (base2.xs != base2.xe) {
-              print("##> in b:${base2.toString()}");
+              (useDebugLog == true ? print("""      ## UPDATEINDEX IN b ${base2.toString()}")}""") : null);
               if (false == infos.contains(base2)) {
-                print("##> in bv:${base2.toString()}");
+                (useDebugLog == true ? print("""        ## UPDATEINDEX IN b add")}""") : null);
                 infos.add(base2);
               }
             }
           }
         } else {
-          print("##> ecase  ${info.toString()} ::${info.id} ${info.xs} <= ${xs} && ${xs} < ${info.xe}");
+          (useDebugLog == true ? print("""      ## UPDATEINDEX OUT ${info.toString()}")}""") : null);
         }
       }
     }
     for (int i = 0; i < infos.length; i++) {
       var info = infos[i];
       if (info.xe <= info.xs) {
-        print("##> delete ${info.toString()}");
+        (useDebugLog == true ? print("""      ## UPDATEINDEX DElETE ${info.toString()}")}""") : null);
         infos.remove(info);
         i--;
       }
@@ -102,17 +104,17 @@ class DynaBlockCore {
     // [height] over
     {
       var head = new FreeSpaceInfo.fromPos(0, ye, rootWidth, xs, xe);
-      print("##> heigh st ${head.toString()}");
+      (useDebugLog == true ? print("""      ## UPDATEINDEX START HEAD ${head.toString()}")}""") : null);
       for (int i = 0; i < infos.length; i++) {
         var info = infos[i];
 //s        print("##> heigh ${info.toString()}");
         if (info.y < head.y) {
-          print("##> heigh cont ${info.toString()}");
+          (useDebugLog == true ? print("""        ## UPDATEINDEX NOACTION ${info.toString()}""") : null);
           continue;
         }
-        print("##> heigh fd ${info.toString()}");
+        (useDebugLog == true ? print("""        ## UPDATEINDEX ACTION i: ${info.toString()}""") : null);
+        (useDebugLog == true ? print("""          ## UPDATEINDEX ACTION start h: ${head.toString()}""") : null);
 
-        print("##> heigh c1 ${head.toString()}");
         if (info.baseXs < head.xs && head.xe < info.baseXe) {
           head = null;
           break;
@@ -127,9 +129,11 @@ class DynaBlockCore {
             head.xe = info.baseXs;
           }
         }
-        print("##> heigh c2 ${head.toString()}");
+        (useDebugLog == true ? print("""          ## UPDATEINDEX ACTION end h: ${head.toString()}""") : null);
+
       }
-      print("##> heigh c ${head.toString()}");
+      (useDebugLog == true ? print("""        ## UPDATEINDEX ACTION i: ${head.toString()}""") : null);
+
       //
       if (head != null) {
         infos.add(head);
