@@ -5,8 +5,9 @@ class DynaBlockCore {
   List<FreeSpaceInfo> infos = [];
   int rootWidth = 0;
   int rootHeight = 0;
+  bool useDebugLog;
 
-  DynaBlockCore({this.rootWidth: 400}) {
+  DynaBlockCore({this.rootWidth: 400, this.useDebugLog: true}) {
     infos.add(new FreeSpaceInfo()
       ..xs = 0
       ..y = 10
@@ -14,7 +15,7 @@ class DynaBlockCore {
   }
 
   FreeSpaceInfo addBlock(int elmW, int elmH) {
-    print("\r\n\r\n#===> ###");
+    (useDebugLog == true ? print("""\r\n\r\n## START call addBlock ${elmW} ${elmH} ##""") : null);
     //
     //
     FreeSpaceInfo info = null;
@@ -22,7 +23,7 @@ class DynaBlockCore {
       info = infos[i];
       var w = (info.xe - info.xs);
       if (w >= elmW) {
-        print("======SELECT>${info.toString()}");
+        (useDebugLog == true ? print("""    ## SELECT FREESPACEINFO ${info.toString()}""") : null);
         break;
       }
       info = null;
@@ -34,13 +35,14 @@ class DynaBlockCore {
     //
     updateIndex(info.xs, info.y, info.xs + elmW, info.y + elmH);
 
-    for (var j in infos) {
-      print(">>info:${j.toString()};");
+    if (useDebugLog) {
+      for (var j in infos) {
+        (useDebugLog == true ? print("""    ## INDEX: ${j.toString()}""") : null);
+      }
     }
     return info;
   }
 
-  
   updateIndex(int xs, int ys, int xe, int ye) {
     print("##> addInfo ${xs}, ${ys}, ${xe}, ${ye}");
     //
@@ -141,8 +143,6 @@ class DynaBlockCore {
       });
     }
   }
-
-
 }
 
 class FreeSpaceInfo {
