@@ -33,6 +33,7 @@ class DynaBlockCore {
       return null;
     }
     //
+    var ret = new FreeSpaceInfo.clone(info);
     updateIndex(info.xs, info.y, info.xs + elmW, info.y + elmH);
 
     if (useDebugLog) {
@@ -40,7 +41,7 @@ class DynaBlockCore {
         (useDebugLog == true ? print("""    ## INDEX: ${j.toString()}""") : null);
       }
     }
-    return info;
+    return ret;
   }
 
   updateIndex(int xs, int ys, int xe, int ye) {
