@@ -169,7 +169,6 @@ class FreeSpaceInfo {
     id = idid++;
   }
   FreeSpaceInfo.fromPos(int x, int y, int width, this.baseXs, this.baseXe) {
-    print("##> fromPos ${x},${y},${width}");
     id = idid++;
     this.xs = x;
     this.xe = x + width;
