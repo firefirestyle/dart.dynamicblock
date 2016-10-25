@@ -7,7 +7,9 @@ import 'dart:async';
 class DynaHtmlView {
   String rootId;
   dynablock.DynaBlockCore core = null;
-  DynaHtmlView({this.rootId: "fire-listcontainer"}){
+  int margineW;
+  int margineH;
+  DynaHtmlView({this.rootId: "fire-listcontainer",this.margineW:15,this.margineH:15}){
   }
 
   updateSize() {
@@ -24,7 +26,7 @@ class DynaHtmlView {
     if(core == null) {
       updateSize();
     }
-    dynablock.FreeSpaceInfo info = core.addBlock(elm.clientWidth+25, elm.clientHeight+25);
+    dynablock.FreeSpaceInfo info = core.addBlock(elm.clientWidth+margineW, elm.clientHeight+margineH);
     elm.style.position = "absolute";
     elm.style.left = "${info.xs}px";
     elm.style.top = "${info.y}px";
