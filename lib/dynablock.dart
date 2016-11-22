@@ -41,6 +41,9 @@ class DynaBlockCore {
         (useDebugLog == true ? print("""    ## INDEX: ${j.toString()}""") : null);
       }
     }
+    if(ret.y+elmH > rootHeight) {
+      rootHeight = ret.y+elmH;
+    }
     return ret;
   }
 
