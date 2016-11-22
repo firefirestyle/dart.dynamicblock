@@ -17,7 +17,7 @@ class DynaHtmlView {
       core = new dynablock.DynaBlockCore(rootWidth: rootElm.clientWidth);
   }
 
-  add(html.Element elm) {
+  dynablock.FreeSpaceInfo add(html.Element elm) {
     var rootElm = html.document.body.querySelector("#${rootId}");
     rootElm.style.position = "relative";
     if(false == rootElm.contains(elm)) {
@@ -30,6 +30,7 @@ class DynaHtmlView {
     elm.style.position = "absolute";
     elm.style.left = "${info.xs}px";
     elm.style.top = "${info.y}px";
+    return info;
   }
 }
 
