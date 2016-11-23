@@ -10,7 +10,7 @@ class DynaHtmlView {
   int margineW;
   int margineH;
   DynaHtmlView({this.rootId: "fire-listcontainer",this.margineW:15,this.margineH:15}){
-    updateSize();
+    //updateSize();
   }
 
   updateSize() {
