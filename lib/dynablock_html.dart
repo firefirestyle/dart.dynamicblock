@@ -27,7 +27,7 @@ class DynaHtmlView {
   }
 
   dynablock.FreeSpaceInfo add(html.Element elm) {
-    var rootElm = html.document.body.querySelector("#${rootId}");
+    var rootElm = getRootElm();
     rootElm.style.position = "relative";
     if(false == rootElm.contains(elm)) {
       rootElm.children.add(elm);
