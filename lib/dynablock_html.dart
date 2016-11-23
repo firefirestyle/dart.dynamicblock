@@ -5,16 +5,22 @@ import 'dart:html' as html;
 import 'dart:async';
 
 class DynaHtmlView {
-  String rootId;
+  List<String> rootId;
   dynablock.DynaBlockCore core = null;
   int margineW;
   int margineH;
-  DynaHtmlView({this.rootId: "fire-listcontainer",this.margineW:15,this.margineH:15}){
+  DynaHtmlView({this.rootId: const["fire-listcontainer"],this.margineW:15,this.margineH:15}){
     //updateSize();
   }
-
+  getRootElm() {
+    var parent = html.document.body;
+    for(String id in this.rootId) {
+      parent = parent.querySelector("#${id}");
+    }
+    return parent;
+  }
   updateSize() {
-      var rootElm = html.document.body.querySelector("#${rootId}");
+      var rootElm = getRootElm();
       if(rootElm != null) {
         core = new dynablock.DynaBlockCore(rootWidth: rootElm.clientWidth);
      }
