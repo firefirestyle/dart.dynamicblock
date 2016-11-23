@@ -10,11 +10,14 @@ class DynaHtmlView {
   int margineW;
   int margineH;
   DynaHtmlView({this.rootId: "fire-listcontainer",this.margineW:15,this.margineH:15}){
+    updateSize();
   }
 
   updateSize() {
       var rootElm = html.document.body.querySelector("#${rootId}");
-      core = new dynablock.DynaBlockCore(rootWidth: rootElm.clientWidth);
+      if(rootElm != null) {
+        core = new dynablock.DynaBlockCore(rootWidth: rootElm.clientWidth);
+     }
   }
 
   dynablock.FreeSpaceInfo add(html.Element elm) {
